@@ -1,264 +1,261 @@
 {
-  "source_file": "early_wakeup_health_dataset.csv",
+  "source_file": "e_commerce.csv",
   "original_shape": {
-    "rows": 10000,
-    "columns": 64
+    "rows": 20848,
+    "columns": 19
   },
   "missing_values": {
     "before": {
-      "total": 4662,
+      "total": 19998,
       "per_column": {
-        "Exercise_Type": 824,
-        "Workout_Intensity": 824,
-        "Alcohol_Consumption": 3014
+        "Alasan Pembatalan": 18018,
+        "Waktu Pesanan Dibuat": 1980
       }
     },
     "after": {
       "total": 0,
       "per_column": {}
     },
-    "resolved": 4662,
-    "method": "Median (numerik), Mode (kategorikal)"
+    "resolved": 19998,
+    "method": "fillna (kategorikal), dropna (datetime), to_numeric + fillna(0) (numerik)"
   },
   "duplicates": {
-    "before": 10000,
-    "after": 10000,
+    "before": 20848,
+    "after": 18868,
     "removed": 0,
     "example_ids": []
   },
-  "outliers": {
-    "per_column": {
-      "BMI": {
-        "Q1": 22.17,
-        "Q3": 28.86,
-        "IQR": 6.69,
-        "lower_bound": 12.13,
-        "upper_bound": 38.9,
-        "outlier_count": 45,
-        "outlier_percentage": 0.45
-      },
-      "Sleep_Duration_Hours": {
-        "Q1": 6.47,
-        "Q3": 7.98,
-        "IQR": 1.51,
-        "lower_bound": 4.2,
-        "upper_bound": 10.25,
-        "outlier_count": 19,
-        "outlier_percentage": 0.19
-      },
-      "Daily_Steps": {
-        "Q1": 6136.0,
-        "Q3": 9969.0,
-        "IQR": 3833.0,
-        "lower_bound": 386.5,
-        "upper_bound": 15718.5,
-        "outlier_count": 5,
-        "outlier_percentage": 0.05
-      },
-      "Health_Score": {
-        "Q1": 66.0,
-        "Q3": 82.8,
-        "IQR": 16.8,
-        "lower_bound": 40.8,
-        "upper_bound": 108.0,
-        "outlier_count": 49,
-        "outlier_percentage": 0.49
-      },
-      "Blood_Sugar_Level": {
-        "Q1": 99.4,
-        "Q3": 115.3,
-        "IQR": 15.9,
-        "lower_bound": 75.55,
-        "upper_bound": 139.15,
-        "outlier_count": 64,
-        "outlier_percentage": 0.64
-      },
-      "Cholesterol_Level": {
-        "Q1": 194.6,
-        "Q3": 226.3,
-        "IQR": 31.7,
-        "lower_bound": 147.05,
-        "upper_bound": 273.85,
-        "outlier_count": 60,
-        "outlier_percentage": 0.6
-      },
-      "Resting_Heart_Rate": {
-        "Q1": 66.0,
-        "Q3": 76.0,
-        "IQR": 10.0,
-        "lower_bound": 51.0,
-        "upper_bound": 91.0,
-        "outlier_count": 43,
-        "outlier_percentage": 0.43
-      },
-      "Systolic_BP": {
-        "Q1": 130.0,
-        "Q3": 146.0,
-        "IQR": 16.0,
-        "lower_bound": 106.0,
-        "upper_bound": 170.0,
-        "outlier_count": 38,
-        "outlier_percentage": 0.38
-      },
-      "Diastolic_BP": {
-        "Q1": 84.0,
-        "Q3": 96.0,
-        "IQR": 12.0,
-        "lower_bound": 66.0,
-        "upper_bound": 114.0,
-        "outlier_count": 51,
-        "outlier_percentage": 0.51
-      }
-    },
-    "total_outlier_rows": 336,
-    "total_clean_rows": 9664,
-    "method": "IQR (Interquartile Range): Q1 - 1.5*IQR to Q3 + 1.5*IQR"
-  },
-  "consistency": {
-    "total_fixes": 401,
-    "out_of_range": {},
-    "time_format_fixed": 0,
-    "categories_normalized": true
-  },
-  "statistics": {
-    "numeric": {
-      "Age": {
-        "mean": 44.67,
-        "median": 43.0,
-        "std": 17.52,
-        "min": 18.0,
-        "max": 80.0,
-        "q1": 29.75,
-        "q3": 58.0
-      },
-      "BMI": {
-        "mean": 25.63,
-        "median": 25.58,
-        "std": 4.87,
-        "min": 16.0,
-        "max": 44.56,
-        "q1": 22.17,
-        "q3": 28.86
-      },
-      "Sleep_Duration_Hours": {
-        "mean": 7.23,
-        "median": 7.23,
-        "std": 1.12,
-        "min": 4.0,
-        "max": 10.0,
-        "q1": 6.47,
-        "q3": 7.98
-      },
-      "Health_Score": {
-        "mean": 74.2,
-        "median": 74.6,
-        "std": 12.27,
-        "min": 27.3,
-        "max": 100.0,
-        "q1": 66.0,
-        "q3": 82.8
-      },
-      "Daily_Steps": {
-        "mean": 8076.05,
-        "median": 8151.5,
-        "std": 2716.82,
-        "min": 500.0,
-        "max": 18609.0,
-        "q1": 6136.0,
-        "q3": 9969.0
-      },
-      "Stress_Level": {
-        "mean": 4.52,
-        "median": 4.5,
-        "std": 1.97,
-        "min": 1.0,
-        "max": 10.0,
-        "q1": 3.1,
-        "q3": 5.9
-      },
-      "Resting_Heart_Rate": {
-        "mean": 71.18,
-        "median": 71.0,
-        "std": 7.14,
-        "min": 45.0,
-        "max": 100.0,
-        "q1": 66.0,
-        "q3": 76.0
-      },
-      "Systolic_BP": {
-        "mean": 138.17,
-        "median": 138.0,
-        "std": 11.38,
-        "min": 94.0,
-        "max": 180.0,
-        "q1": 130.0,
-        "q3": 146.0
-      },
-      "Diastolic_BP": {
-        "mean": 89.72,
-        "median": 90.0,
-        "std": 8.9,
-        "min": 55.0,
-        "max": 120.0,
-        "q1": 84.0,
-        "q3": 96.0
-      },
-      "Cholesterol_Level": {
-        "mean": 210.71,
-        "median": 210.4,
-        "std": 23.28,
-        "min": 130.0,
-        "max": 297.8,
-        "q1": 194.6,
-        "q3": 226.3
-      },
-      "Blood_Sugar_Level": {
-        "mean": 107.4,
-        "median": 107.3,
-        "std": 11.62,
-        "min": 70.0,
-        "max": 149.7,
-        "q1": 99.4,
-        "q3": 115.3
-      },
-      "Healthy_Aging_Score": {
-        "mean": 74.81,
-        "median": 75.7,
-        "std": 14.63,
-        "min": 12.4,
-        "max": 100.0,
-        "q1": 65.3,
-        "q3": 85.7
-      }
-    },
-    "categorical": {
-      "Gender": {
-        "Male": 4851,
-        "Female": 4748,
-        "Non-Binary": 401
-      },
-      "Wellness_Category": {
-        "Good": 4429,
-        "Excellent": 3320,
-        "Average": 2137,
-        "Poor": 114
-      },
-      "Early_Waker": {
-        "No": 5842,
-        "Yes": 4158
-      },
-      "Fitness_Level": {
-        "Good": 4429,
-        "Excellent": 3320,
-        "Average": 2137,
-        "Poor": 114
-      }
-    },
-    "total_rows": 10000,
-    "total_columns": 65
-  },
   "final_shape": {
-    "rows": 10000,
-    "columns": 65
-  }
+    "rows": 18868,
+    "columns": 22
+  },
+  "sample_before": [
+    {
+      "order_id": "ORD_0000001",
+      "total_qty": 2,
+      "total_weight_gr": 2000,
+      "total_returned_qty": 0,
+      "Total Diskon": 0,
+      "product_categories": "Celengan",
+      "num_product_categories": 1,
+      "Status Pesanan": "Selesai",
+      "Alasan Pembatalan": "NaN",
+      "Opsi Pengiriman": "Reguler (Cashless)-SPX Standard",
+      "Metode Pembayaran": "Saldo ShopeePay",
+      "Kota/Kabupaten": "KOTA SERANG",
+      "Provinsi": "BANTEN",
+      "Ongkos Kirim Dibayar oleh Pembeli": 0,
+      "Estimasi Potongan Biaya Pengiriman": 10000,
+      "Total Pembayaran": 38300,
+      "Perkiraan Ongkos Kirim": 10000,
+      "Waktu Pesanan Dibuat": "2024-04-01 00:15",
+      "source_file": "AprilSales2024.xlsx"
+    },
+    {
+      "order_id": "ORD_0000002",
+      "total_qty": 1,
+      "total_weight_gr": 500,
+      "total_returned_qty": 0,
+      "Total Diskon": 0,
+      "product_categories": "Celengan",
+      "num_product_categories": 1,
+      "Status Pesanan": "Selesai",
+      "Alasan Pembatalan": "NaN",
+      "Opsi Pengiriman": "Hemat Kargo-SPX Hemat",
+      "Metode Pembayaran": "COD (Bayar di Tempat)",
+      "Kota/Kabupaten": "KOTA SEMARANG",
+      "Provinsi": "JAWA TENGAH",
+      "Ongkos Kirim Dibayar oleh Pembeli": 0,
+      "Estimasi Potongan Biaya Pengiriman": 14500,
+      "Total Pembayaran": 18576,
+      "Perkiraan Ongkos Kirim": 14500,
+      "Waktu Pesanan Dibuat": "2024-04-01 01:47",
+      "source_file": "AprilSales2024.xlsx"
+    },
+    {
+      "order_id": "ORD_0000003",
+      "total_qty": 1,
+      "total_weight_gr": 500,
+      "total_returned_qty": 0,
+      "Total Diskon": 0,
+      "product_categories": "Celengan",
+      "num_product_categories": 1,
+      "Status Pesanan": "Selesai",
+      "Alasan Pembatalan": "NaN",
+      "Opsi Pengiriman": "Hemat Kargo-SPX Hemat",
+      "Metode Pembayaran": "SeaBank Bayar Instan",
+      "Kota/Kabupaten": "KAB. BOGOR",
+      "Provinsi": "JAWA BARAT",
+      "Ongkos Kirim Dibayar oleh Pembeli": 0,
+      "Estimasi Potongan Biaya Pengiriman": 8000,
+      "Total Pembayaran": 7069,
+      "Perkiraan Ongkos Kirim": 8000,
+      "Waktu Pesanan Dibuat": "2024-04-01 04:25",
+      "source_file": "AprilSales2024.xlsx"
+    },
+    {
+      "order_id": "ORD_0000004",
+      "total_qty": 2,
+      "total_weight_gr": 400,
+      "total_returned_qty": 0,
+      "Total Diskon": 0,
+      "product_categories": "Mangkok Sambal / Saus",
+      "num_product_categories": 1,
+      "Status Pesanan": "Selesai",
+      "Alasan Pembatalan": "NaN",
+      "Opsi Pengiriman": "Hemat Kargo-SPX Hemat",
+      "Metode Pembayaran": "COD (Bayar di Tempat)",
+      "Kota/Kabupaten": "KOTA JAMBI",
+      "Provinsi": "JAMBI",
+      "Ongkos Kirim Dibayar oleh Pembeli": 0,
+      "Estimasi Potongan Biaya Pengiriman": 20000,
+      "Total Pembayaran": 32200,
+      "Perkiraan Ongkos Kirim": 20000,
+      "Waktu Pesanan Dibuat": "2024-04-01 04:41",
+      "source_file": "AprilSales2024.xlsx"
+    },
+    {
+      "order_id": "ORD_0000005",
+      "total_qty": 3,
+      "total_weight_gr": 3600,
+      "total_returned_qty": 0,
+      "Total Diskon": 0,
+      "product_categories": "Keranjang, Other, Tempat Nasi",
+      "num_product_categories": 3,
+      "Status Pesanan": "Batal",
+      "Alasan Pembatalan": "Dibatalkan oleh Pembeli. Alasan: Ubah Pesanan yang Ada",
+      "Opsi Pengiriman": "Hemat Kargo-SPX Hemat",
+      "Metode Pembayaran": "COD (Bayar di Tempat)",
+      "Kota/Kabupaten": "KOTA TANGERANG",
+      "Provinsi": "BANTEN",
+      "Ongkos Kirim Dibayar oleh Pembeli": 0,
+      "Estimasi Potongan Biaya Pengiriman": 0,
+      "Total Pembayaran": 0,
+      "Perkiraan Ongkos Kirim": 8000,
+      "Waktu Pesanan Dibuat": "2024-04-01 06:12",
+      "source_file": "AprilSales2024.xlsx"
+    }
+  ],
+  "sample_after": [
+    {
+      "order_id": "ORD_0000001",
+      "total_qty": 2,
+      "total_weight_gr": 2000,
+      "total_returned_qty": 0,
+      "Total Diskon": 0,
+      "product_categories": "Celengan",
+      "num_product_categories": 1,
+      "Status Pesanan": "Selesai",
+      "Alasan Pembatalan": "Tidak Batal",
+      "Opsi Pengiriman": "Reguler (Cashless)-SPX Standard",
+      "Metode Pembayaran": "Saldo ShopeePay",
+      "Kota/Kabupaten": "KOTA SERANG",
+      "Provinsi": "BANTEN",
+      "Ongkos Kirim Dibayar oleh Pembeli": 0,
+      "Estimasi Potongan Biaya Pengiriman": 10000,
+      "Total Pembayaran": 38300,
+      "Perkiraan Ongkos Kirim": 10000,
+      "Waktu Pesanan Dibuat": "2024-04-01 00:15:00",
+      "source_file": "AprilSales2024.xlsx",
+      "Cluster": 2,
+      "Cluster_Label": "Budget Order",
+      "Is_Batal": 0
+    },
+    {
+      "order_id": "ORD_0000002",
+      "total_qty": 1,
+      "total_weight_gr": 500,
+      "total_returned_qty": 0,
+      "Total Diskon": 0,
+      "product_categories": "Celengan",
+      "num_product_categories": 1,
+      "Status Pesanan": "Selesai",
+      "Alasan Pembatalan": "Tidak Batal",
+      "Opsi Pengiriman": "Hemat Kargo-SPX Hemat",
+      "Metode Pembayaran": "COD (Bayar di Tempat)",
+      "Kota/Kabupaten": "KOTA SEMARANG",
+      "Provinsi": "JAWA TENGAH",
+      "Ongkos Kirim Dibayar oleh Pembeli": 0,
+      "Estimasi Potongan Biaya Pengiriman": 14500,
+      "Total Pembayaran": 18576,
+      "Perkiraan Ongkos Kirim": 14500,
+      "Waktu Pesanan Dibuat": "2024-04-01 01:47:00",
+      "source_file": "AprilSales2024.xlsx",
+      "Cluster": 2,
+      "Cluster_Label": "Budget Order",
+      "Is_Batal": 0
+    },
+    {
+      "order_id": "ORD_0000003",
+      "total_qty": 1,
+      "total_weight_gr": 500,
+      "total_returned_qty": 0,
+      "Total Diskon": 0,
+      "product_categories": "Celengan",
+      "num_product_categories": 1,
+      "Status Pesanan": "Selesai",
+      "Alasan Pembatalan": "Tidak Batal",
+      "Opsi Pengiriman": "Hemat Kargo-SPX Hemat",
+      "Metode Pembayaran": "SeaBank Bayar Instan",
+      "Kota/Kabupaten": "KAB. BOGOR",
+      "Provinsi": "JAWA BARAT",
+      "Ongkos Kirim Dibayar oleh Pembeli": 0,
+      "Estimasi Potongan Biaya Pengiriman": 8000,
+      "Total Pembayaran": 7069,
+      "Perkiraan Ongkos Kirim": 8000,
+      "Waktu Pesanan Dibuat": "2024-04-01 04:25:00",
+      "source_file": "AprilSales2024.xlsx",
+      "Cluster": 2,
+      "Cluster_Label": "Budget Order",
+      "Is_Batal": 0
+    },
+    {
+      "order_id": "ORD_0000004",
+      "total_qty": 2,
+      "total_weight_gr": 400,
+      "total_returned_qty": 0,
+      "Total Diskon": 0,
+      "product_categories": "Mangkok Sambal / Saus",
+      "num_product_categories": 1,
+      "Status Pesanan": "Selesai",
+      "Alasan Pembatalan": "Tidak Batal",
+      "Opsi Pengiriman": "Hemat Kargo-SPX Hemat",
+      "Metode Pembayaran": "COD (Bayar di Tempat)",
+      "Kota/Kabupaten": "KOTA JAMBI",
+      "Provinsi": "JAMBI",
+      "Ongkos Kirim Dibayar oleh Pembeli": 0,
+      "Estimasi Potongan Biaya Pengiriman": 20000,
+      "Total Pembayaran": 32200,
+      "Perkiraan Ongkos Kirim": 20000,
+      "Waktu Pesanan Dibuat": "2024-04-01 04:41:00",
+      "source_file": "AprilSales2024.xlsx",
+      "Cluster": 2,
+      "Cluster_Label": "Budget Order",
+      "Is_Batal": 0
+    },
+    {
+      "order_id": "ORD_0000005",
+      "total_qty": 3,
+      "total_weight_gr": 3600,
+      "total_returned_qty": 0,
+      "Total Diskon": 0,
+      "product_categories": "Keranjang, Other, Tempat Nasi",
+      "num_product_categories": 3,
+      "Status Pesanan": "Batal",
+      "Alasan Pembatalan": "Dibatalkan oleh Pembeli. Alasan: Ubah Pesanan yang Ada",
+      "Opsi Pengiriman": "Hemat Kargo-SPX Hemat",
+      "Metode Pembayaran": "COD (Bayar di Tempat)",
+      "Kota/Kabupaten": "KOTA TANGERANG",
+      "Provinsi": "BANTEN",
+      "Ongkos Kirim Dibayar oleh Pembeli": 0,
+      "Estimasi Potongan Biaya Pengiriman": 0,
+      "Total Pembayaran": 0,
+      "Perkiraan Ongkos Kirim": 8000,
+      "Waktu Pesanan Dibuat": "2024-04-01 06:12:00",
+      "source_file": "AprilSales2024.xlsx",
+      "Cluster": 2,
+      "Cluster_Label": "Budget Order",
+      "Is_Batal": 1
+    }
+  ]
 }
