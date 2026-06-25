@@ -1,4 +1,4 @@
-# 📊 Analitik & Visualisasi Data E-Commerce
+# Analitik & Visualisasi Data E-Commerce
 
 Aplikasi Dashboard interaktif berbasis **Laravel** yang mengintegrasikan Analitik Data dan Machine Learning (Python) untuk membedah performa penjualan dan perilaku pelanggan E-Commerce.
 
@@ -6,7 +6,7 @@ Proyek ini disusun sebagai **Tugas Besar Analitik & Visualisasi Data** (Semester
 
 ---
 
-## ✨ Fitur Utama
+## Fitur Utama
 
 Aplikasi ini dibagi menjadi 3 halaman utama:
 
@@ -32,7 +32,7 @@ Sistem rekomendasi bisnis cerdas berdasarkan pemodelan *Machine Learning*:
 
 ---
 
-## 🛠️ Teknologi yang Digunakan
+## Teknologi yang Digunakan
 
 *   **Backend & Framework:** Laravel 11, PHP 8.2
 *   **Frontend:** Blade Templating, Vanilla CSS, Feather Icons
@@ -41,7 +41,7 @@ Sistem rekomendasi bisnis cerdas berdasarkan pemodelan *Machine Learning*:
 
 ---
 
-## 🚀 Instalasi & Menjalankan Proyek
+## Instalasi & Menjalankan Proyek
 
 1. **Clone repositori ini:**
    ```bash
@@ -77,7 +77,7 @@ Sistem rekomendasi bisnis cerdas berdasarkan pemodelan *Machine Learning*:
 
 ---
 
-## 📂 Struktur File Penting
+## Struktur File Penting
 
 *   `app/Http/Controllers/DashboardController.php`: Logika pemrosesan SQL dinamis untuk filter dan visualisasi chart.
 *   `resources/views/`: Berisi seluruh tampilan halaman (`dashboard.blade.php`, `data-cleaning.blade.php`, `actions.blade.php`).
