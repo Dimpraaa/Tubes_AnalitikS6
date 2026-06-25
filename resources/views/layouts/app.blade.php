@@ -16,6 +16,9 @@
     {{-- Feather Icons --}}
     <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.29.2/dist/feather.min.js"></script>
 
+    {{-- html2pdf --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
     <style>
         :root {
             --bg-primary: #f8fafc;
@@ -125,6 +128,16 @@
             background: white;
             min-width: 150px;
         }
+
+        @media print {
+            .sidebar { display: none !important; }
+            .main-content { margin-left: 0 !important; padding: 0 !important; }
+            body { background: white !important; }
+            .card { box-shadow: none !important; border: 1px solid var(--border-color) !important; break-inside: avoid; }
+            .no-print { display: none !important; }
+            .grid-2, .grid-3, .grid-4 { display: flex !important; flex-wrap: wrap !important; gap: 10px !important; }
+            .grid-2 > div, .grid-3 > div, .grid-4 > div { flex: 1 1 45% !important; }
+        }
     </style>
     @yield('extra-styles')
 </head>
@@ -135,8 +148,14 @@
             <h1>ShopViz</h1>
         </div>
         <nav>
-            <a href="/" class="nav-link active">
+            <a href="/" class="nav-link {{ request()->is('/') ? 'active' : '' }}">
                 <i data-feather="pie-chart"></i> Dashboard
+            </a>
+            <a href="/data-cleaning" class="nav-link {{ request()->is('data-cleaning') ? 'active' : '' }}">
+                <i data-feather="database"></i> Data Cleaning
+            </a>
+            <a href="/actions" class="nav-link {{ request()->is('actions') ? 'active' : '' }}">
+                <i data-feather="zap"></i> Actionable Insights
             </a>
         </nav>
     </aside>

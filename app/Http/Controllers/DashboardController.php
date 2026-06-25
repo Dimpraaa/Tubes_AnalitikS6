@@ -60,18 +60,12 @@ class DashboardController extends Controller
             ->orderBy('total', 'desc')
             ->get();
 
-        // 5. Scatter Plot: K-Means Clustering (Sampled for performance)
-        $scatterQuery = (clone $query)
-            ->select('total_qty', 'total_pembayaran', 'cluster_label')
-            ->limit(500)
-            ->inRandomOrder()
+        // 5. Segment Profile Chart: K-Means Clustering (Aggregated)
+        $segmentChart = (clone $query)
+            ->select('cluster_label', DB::raw('AVG(total_qty) as avg_qty'), DB::raw('AVG(total_pembayaran) as avg_spend'))
+            ->groupBy('cluster_label')
+            ->orderBy('avg_spend', 'asc')
             ->get();
-            
-        $scatterChart = $scatterQuery->groupBy('cluster_label')->map(function ($items) {
-            return $items->map(function ($item) {
-                return [$item->total_qty, $item->total_pembayaran];
-            });
-        });
 
         // 6. Random Forest Feature Importance (Read from JSON)
         $rfJsonPath = public_path('data/rf_feature_importance.json');
@@ -86,7 +80,7 @@ class DashboardController extends Controller
 
         return view('dashboard', compact(
             'summary', 'barChart', 'lineChart', 'donutChart', 
-            'scatterChart', 'featureImportance', 
+            'segmentChart', 'featureImportance', 
             'months', 'provinces', 'filters'
         ));
     }

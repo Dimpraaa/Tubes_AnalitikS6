@@ -1,60 +1,90 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 📊 Analitik & Visualisasi Data E-Commerce
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Aplikasi Dashboard interaktif berbasis **Laravel** yang mengintegrasikan Analitik Data dan Machine Learning (Python) untuk membedah performa penjualan dan perilaku pelanggan E-Commerce.
 
-## About Laravel
+Proyek ini disusun sebagai **Tugas Besar Analitik & Visualisasi Data** (Semester 6).
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## ✨ Fitur Utama
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Aplikasi ini dibagi menjadi 3 halaman utama:
 
-## Learning Laravel
+### 1. Dashboard (Interactive Visualizations)
+Halaman utama yang menampilkan ringkasan data penjualan dengan grafik interaktif menggunakan **ApexCharts**.
+*   **KPI Cards:** Total Revenue, Total Orders, dan Cancellation Rate.
+*   **Line Chart:** Tren fluktuasi pendapatan bulanan.
+*   **Bar Chart:** Top 10 kategori produk penyumbang revenue tertinggi.
+*   **Donut Chart:** Proporsi perbandingan metode pembayaran.
+*   **Grafik Kombinasi (Bar & Line):** Profil segmen pelanggan berdasarkan algoritma *K-Means Clustering*.
+*   **Filter Interaktif:** Menyortir seluruh data di atas berdasarkan Bulan atau Provinsi.
+*   **Cetak PDF:** Fitur *direct download* dashboard menjadi dokumen laporan PDF yang siap diserahkan ke manajemen.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+### 2. Data Cleaning
+Halaman dokumentasi transparansi pra-pemrosesan data.
+*   Laporan deteksi dan penanganan *Missing Values* & Data Duplikat.
+*   Tabel komparasi dataset mentah (*Before*) melawan dataset bersih (*After*) yang menyorot sel-sel bermasalah secara otomatis.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### 3. Actionable Insights
+Sistem rekomendasi bisnis cerdas berdasarkan pemodelan *Machine Learning*:
+*   **Targeted Campaign Manager (K-Means):** Rekomendasi promosi otomatis berdasarkan klasifikasi daya beli pelanggan (Budget, Standard, High Value, Bulk).
+*   **High-Risk Order Mitigation (Random Forest):** Sistem Peringatan Dini (*Early Warning System*) untuk mendeteksi pesanan yang rawan dibatalkan, khususnya pada pengguna COD dengan nilai transaksi besar.
 
-## Laravel Sponsors
+---
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## 🛠️ Teknologi yang Digunakan
 
-### Premium Partners
+*   **Backend & Framework:** Laravel 11, PHP 8.2
+*   **Frontend:** Blade Templating, Vanilla CSS, Feather Icons
+*   **Data Visualization:** ApexCharts.js
+*   **Machine Learning (Data Processing):** Python (Pandas, Scikit-Learn) -> Diekspor ke format JSON
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+---
 
-## Contributing
+## 🚀 Instalasi & Menjalankan Proyek
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+1. **Clone repositori ini:**
+   ```bash
+   git clone https://github.com/Dimpraaa/Tubes_AnalitikS6.git
+   cd Tubes_AnalitikS6/tb_visualisasi
+   ```
 
-## Code of Conduct
+2. **Install dependensi PHP/Laravel:**
+   ```bash
+   composer install
+   ```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+3. **Salin file .env dan generate App Key:**
+   ```bash
+   cp .env.example .env
+   php artisan key:generate
+   ```
 
-## Security Vulnerabilities
+4. **Konfigurasi Database:**
+   Pastikan Anda mengatur konfigurasi koneksi database di file `.env`. (Contoh: menggunakan MySQL).
+   
+5. **Jalankan Migrasi & Seeder:**
+   Karena aplikasi ini membaca data dari database, jalankan perintah berikut untuk mengimpor data transaksi mentah (*e_commerce.csv*) ke dalam tabel `orders`.
+   ```bash
+   php artisan migrate:fresh --seed
+   ```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+6. **Jalankan Local Development Server:**
+   ```bash
+   php artisan serve
+   ```
+   Akses `http://localhost:8000` di browser Anda.
 
-## License
+---
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
-# tb_visualisasi
+## 📂 Struktur File Penting
+
+*   `app/Http/Controllers/DashboardController.php`: Logika pemrosesan SQL dinamis untuk filter dan visualisasi chart.
+*   `resources/views/`: Berisi seluruh tampilan halaman (`dashboard.blade.php`, `data-cleaning.blade.php`, `actions.blade.php`).
+*   `python/`: Menyimpan *script* Google Colab/Jupyter Notebook (`data_cleaning.ipynb`, `machine_learning.py`) yang memproses ML dan mengekspor hasilnya ke format JSON.
+*   `public/data/`: Tempat tersimpannya file hasil *Machine Learning* (`cleaning_report.json` dan `rf_feature_importance.json`) yang akan dibaca oleh Laravel.
+*   `Skenario_Presentasi.md`: Naskah presentasi tugas besar yang memetakan seluruh ketentuan penilaian proyek.
+
+---
+
+*Dibuat untuk memenuhi Tugas Besar Mata Kuliah Analitik & Visualisasi Data - Semester 6.*

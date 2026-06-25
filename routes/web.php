@@ -13,3 +13,8 @@ Route::get('/api/correlation-data', [DashboardController::class, 'getCorrelation
 // Data Cleaning
 Route::get('/data-cleaning', [DataCleaningController::class, 'index'])->name('data-cleaning');
 Route::get('/api/cleaning-details', [DataCleaningController::class, 'getCleaningDetails']);
+
+// Actionable Insights
+use App\Http\Controllers\ActionController;
+Route::get('/actions', [ActionController::class, 'index'])->name('actions');
+Route::post('/actions/promo', [ActionController::class, 'sendPromo'])->name('actions.promo');

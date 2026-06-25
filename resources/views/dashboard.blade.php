@@ -3,6 +3,7 @@
 @section('title', 'E-Commerce Dashboard')
 
 @section('content')
+<div id="dashboard-content">
 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
     <div>
         <h2 style="font-size: 24px; font-weight: 700; color: #0f172a;">E-Commerce Sales Analytics</h2>
@@ -24,8 +25,11 @@
             @endforeach
         </select>
         
-        <button type="submit" class="btn">Filter</button>
-        <a href="/" class="btn" style="background: #e2e8f0; color: #475569; text-decoration: none;">Reset</a>
+        <button type="submit" class="btn no-print">Filter</button>
+        <a href="/" class="btn no-print" style="background: #e2e8f0; color: #475569; text-decoration: none;">Reset</a>
+        <button type="button" onclick="generatePDF()" class="btn no-print" style="background: #10b981; display: flex; align-items: center; gap: 6px;">
+            <i data-feather="download" style="width: 16px; height: 16px;"></i> Unduh PDF
+        </button>
     </form>
 </div>
 
@@ -68,9 +72,9 @@
         <div id="donutChart"></div>
     </div>
     <div class="card">
-        <h3 class="card-title">K-Means: Customer Segmentation (Qty vs Spend)</h3>
-        <p style="font-size: 12px; color: #94a3b8; margin-bottom: 12px;">Visualisasi sampel 500 data pesanan dari hasil segmentasi K-Means.</p>
-        <div id="scatterChart"></div>
+        <h3 class="card-title">K-Means: Profil Segmen Pelanggan</h3>
+        <p style="font-size: 12px; color: #94a3b8; margin-bottom: 12px;">Perbandingan Rata-rata Pengeluaran (Batang) vs Kuantitas Barang (Garis) dari ke-4 klaster pelanggan.</p>
+        <div id="segmentChart"></div>
     </div>
 </div>
 
@@ -81,10 +85,40 @@
     <div id="rfChart"></div>
 </div>
 
+</div>
 @endsection
 
 @section('scripts')
 <script>
+    // PDF Generation
+    function generatePDF() {
+        const element = document.getElementById('dashboard-content');
+        const btn = document.querySelector('button[onclick="generatePDF()"]');
+        const originalText = btn.innerHTML;
+        
+        // Change button state
+        btn.innerHTML = '<i data-feather="loader" style="width: 16px; height: 16px;"></i> Memproses...';
+        feather.replace();
+        
+        const noPrintElements = document.querySelectorAll('.no-print');
+        noPrintElements.forEach(el => el.style.visibility = 'hidden'); // Use visibility to keep layout intact
+
+        const opt = {
+            margin:       0.3,
+            filename:     'E-Commerce_Analytics_Report.pdf',
+            image:        { type: 'jpeg', quality: 0.98 },
+            html2canvas:  { scale: 2, useCORS: true },
+            jsPDF:        { unit: 'in', format: 'a4', orientation: 'landscape' }
+        };
+
+        html2pdf().set(opt).from(element).save().then(() => {
+            // Restore elements
+            noPrintElements.forEach(el => el.style.visibility = 'visible');
+            btn.innerHTML = originalText;
+            feather.replace();
+        });
+    }
+
     // 1. Line Chart (Tren Penjualan)
     const lineData = @json($lineChart);
     const lineOptions = {
@@ -118,7 +152,22 @@
             bar: { borderRadius: 4, horizontal: true }
         },
         dataLabels: { enabled: false },
-        xaxis: { categories: barData.map(item => item.category) }
+        xaxis: { 
+            categories: barData.map(item => item.category),
+            labels: {
+                formatter: function(val) {
+                    if (val >= 1000000) return (val / 1000000).toFixed(1) + "M";
+                    return val;
+                }
+            }
+        },
+        tooltip: {
+            y: {
+                formatter: function(val) {
+                    return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+                }
+            }
+        }
     };
     new ApexCharts(document.querySelector("#barChart"), barOptions).render();
 
@@ -134,29 +183,41 @@
     };
     new ApexCharts(document.querySelector("#donutChart"), donutOptions).render();
 
-    // 4. Scatter Plot (K-Means)
-    const scatterDataRaw = @json($scatterChart);
-    const scatterSeries = Object.keys(scatterDataRaw).map(key => {
-        return {
-            name: key,
-            data: scatterDataRaw[key]
-        }
-    });
-    const scatterOptions = {
-        series: scatterSeries,
-        chart: { type: 'scatter', height: 320, zoom: { type: 'xy' } },
-        colors: ['#3b82f6', '#10b981', '#f59e0b', '#8b5cf6'],
-        xaxis: { 
-            title: { text: 'Total Quantity' },
-            tickAmount: 10
+    // 4. Mixed Chart (K-Means Segment Profile)
+    const segmentData = @json($segmentChart);
+    const segmentOptions = {
+        series: [
+            { name: 'Rata-rata Pengeluaran (Rp)', type: 'column', data: segmentData.map(d => d.avg_spend) },
+            { name: 'Rata-rata Kuantitas', type: 'line', data: segmentData.map(d => d.avg_qty) }
+        ],
+        chart: { type: 'line', height: 320, toolbar: { show: false } },
+        colors: ['#3b82f6', '#f59e0b'],
+        stroke: { width: [0, 4] },
+        plotOptions: {
+            bar: { borderRadius: 4, columnWidth: '50%' }
         },
-        yaxis: { 
-            title: { text: 'Total Pembayaran (Rp)' },
-            labels: { formatter: (val) => "Rp " + (val / 1000).toFixed(0) + "K" }
-        },
-        legend: { position: 'top' }
+        xaxis: { categories: segmentData.map(d => d.cluster_label) },
+        yaxis: [
+            { 
+                title: { text: 'Pengeluaran (Rp)', style: { color: '#3b82f6' } }, 
+                labels: { 
+                    style: { colors: '#3b82f6' },
+                    formatter: (val) => "Rp " + (val / 1000).toFixed(0) + "K" 
+                } 
+            },
+            { 
+                opposite: true, 
+                title: { text: 'Kuantitas Barang', style: { color: '#f59e0b' } },
+                labels: { 
+                    style: { colors: '#f59e0b' },
+                    formatter: (val) => val.toFixed(1) 
+                }
+            }
+        ],
+        legend: { position: 'top' },
+        dataLabels: { enabled: false }
     };
-    new ApexCharts(document.querySelector("#scatterChart"), scatterOptions).render();
+    new ApexCharts(document.querySelector("#segmentChart"), segmentOptions).render();
 
     // 5. Bar Chart (Random Forest Feature Importance)
     const rfData = @json($featureImportance);
